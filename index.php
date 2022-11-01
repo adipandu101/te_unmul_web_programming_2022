@@ -27,7 +27,7 @@ $result = mysqli_query($conn, $sql);
         <div class="row">
             <div class="col">
                 <a href="/progweb/add.php">
-                    <button class="btn btn-primary"> <i class="bi bi-plus-circle"></i> </button>
+                    <button id="button-add" class="btn btn-primary"> <i class="bi bi-plus-circle"></i> </button>
                 </a>
             </div>
         </div>
@@ -64,12 +64,14 @@ $result = mysqli_query($conn, $sql);
                                 <td><?php echo $row["nama_siswa"]; ?></td>
                                 <td><?php echo $row["alamat_siswa"]; ?></td>
                                 <td>
-                                    <a href="/progweb/edit.php?id=<?php echo $row['id']; ?>">
-                                        <button class="btn btn-warning"><i class="bi bi-pencil-square"></i></button>
+                                    <a href="/progweb/edit.php?id=<?php echo $row["id"]; ?>" class="btn btn-warning">
+                                        <i class="bi bi-pencil-square"></i>
                                     </a>
-                                    <a href="/progweb/delete.php?id=<?php echo $row['id']; ?>">
-                                        <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+
+                                    <a href="/progweb/delete.php?id=<?php echo $row["id"]; ?>" class="btn btn-danger">
+                                        <i class="bi bi-trash"></i>
                                     </a>
+
                                 </td>
                             </tr>
                         <?php } ?>

@@ -31,6 +31,7 @@ $result = mysqli_query($conn, $sql);
                 </a>
             </div>
         </div>
+
         <div class="row">
             <div class="col">
                 <table class="table">
@@ -78,12 +79,45 @@ $result = mysqli_query($conn, $sql);
                     </tbody>
                 </table>
             </div>
+            <div class="col">
+                <h1>Section Javascript</h1>
+                <div class="row">
+                    <div class="col">
+                        <input type="number" id="input1" class="form-control">
+                        <br>
+                        <input type="number" id="input2" class="form-control">
+                        <br>
+                        <button id="button1" onclick="myfunction('Function Executed')" class="btn btn-success">
+                            CLICK ME
+                        </button>
+                        <br><br>
+                        <input readonly id="hasil" class="form-control">
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+            console.log('Hello World');
+        })
+
+        function myfunction(param) {
+            var a = $('#input1').val();
+            var b = $('#input2').val();
+            var result = a * b;
+            $('#hasil').val(result);
+
+            $('#button1').attr('class', 'btn btn-danger');
+        }
+    </script>
 </body>
 
 </html>

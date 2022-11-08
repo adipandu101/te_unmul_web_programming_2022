@@ -104,3 +104,76 @@ if (mysqli_query($conn, $sql)) {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 ?>
+
+
+<!-- API ---------------------------------------------------------------------->
+<?php
+include('../connection.php');
+$sql = "SELECT * FROM datasiswa";
+
+$result = mysqli_query($conn, $sql);
+while ($row = mysqli_fetch_assoc($result)) {
+    $myArray[] = $row;
+}
+
+header('Content-type: application/json');
+echo json_encode($myArray);
+
+
+
+
+
+
+include('../connection.php');
+
+$no_induk = $_POST['no_induk'];
+$nama_siswa = $_POST['nama_siswa'];
+$alamat_siswa = $_POST['alamat_siswa'];
+
+$sql = "INSERT INTO datasiswa (no_induk, nama_siswa, alamat_siswa) VALUES ('$no_induk', '$nama_siswa', '$alamat_siswa')";
+
+
+if (mysqli_query($conn, $sql)) {
+    echo json_encode('success');
+} else {
+    echo json_encode('error');
+}
+?>
+
+
+<!-- JS AJAX-------------------------------------------------------------->
+
+<script>
+    $.get("/progweb/api/getdata.php", function(data, status) {
+        let html = data.map(d => {
+            return '<div>' + d.no_induk + '</div>';
+        })
+        console.log(data, status)
+        $('#data').html(html)
+    });
+
+
+
+
+    function refreshData() {
+        $.get("/progweb/api/getdata.php", function(data, status) {
+            let html = data.map(d => {
+
+                let row = "<tr><td>" + d.no_induk + "</td><td>" + d.nama_siswa + "</td><td>" + d.alamat_siswa + "</td>";
+                row += "<td>";
+                row += "<button onclick='openModalConfirmation(" + d.id + ")' class='btn btn-danger'><i class='bi bi-trash'></i></button>";
+                row += "</td>";
+                row += "</tr>";
+
+                return row;
+            })
+            console.log(data, status)
+            $('#data').html(html)
+        });
+    }
+
+    function openModalConfirmation(id) {
+        console.log(id)
+        $('#exampleModal').modal('show');
+    }
+</script>

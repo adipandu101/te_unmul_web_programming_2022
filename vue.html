@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-5">
+                    {{message}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-5">
+                    <input type="number" class="form-control" v-model="input1"><br>
+                    <input type="number" class="form-control" v-model="input2">
+                    <hr />
+                    Hasil : {{hasil}}
+                    <hr />
+                    <button class="btn btn-info" @click="tambah">+</button>
+                    <button class="btn btn-info" @click="kurang">-</button>
+                    <button class="btn btn-info" @click="kali">X</button>
+                    <button class="btn btn-info" @click="bagi">:</button>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-5">
+                    <button class="btn btn-info" @click="getDataFromAPI">GET DATA FROM API</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-5">
+                    <table class="table">
+                        <thead>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Alamat</th>
+                        </thead>
+                        <tbody>
+                            <tr v-for="i in array">
+                                <td>{{i.id}}</td>
+                                <td>{{i.nama_siswa}}</td>
+                                <td>{{i.alamat_siswa}}</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                message: "Kalkulator Sederhana",
+                input1: null,
+                input2: null,
+                hasil: null,
+                array: []
+            },
+            created() {
+                console.log('running script 2')
+            },
+            mounted() {
+                console.log('running script 1')
+            },
+            methods: {
+                tambah() {
+                    this.hasil = parseFloat(this.input1) + parseFloat(this.input2)
+                },
+                kurang() {
+                    this.hasil = parseFloat(this.input1) - parseFloat(this.input2)
+                },
+                kali() {
+                    this.hasil = parseFloat(this.input1) * parseFloat(this.input2)
+                },
+                bagi() {
+                    this.hasil = parseFloat(this.input1) / parseFloat(this.input2)
+                },
+
+                getDataFromAPI() {
+                    axios.get('/progweb/api/getdata.php').then(response => {
+                        this.array = response.data
+                    })
+                }
+            }
+        })
+
+    </script>
+
+
+</body>
+
+</html>
